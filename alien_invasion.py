@@ -26,9 +26,7 @@ class AlienInvasion:
         """start the main loop for the game"""
         while True: 
             #Watch for keyboard and mouse events
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit() 
+            self._check_events()
             
             #Redraw the screen during each pass through the loop 
             self.screen.fill(self.settings.bg_color)
@@ -36,9 +34,14 @@ class AlienInvasion:
             self.ship.blitme()
             pygame.display.flip() 
 
+    def _check_events(self): #A helper method does work insde a class but isn't meant to be called through an instance. A single leading underscore indicates a helper method 
+        #Watch for keyboard and mouse events
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    sys.exit() 
+
 if __name__ == '__main__':
     # Make a game instance, and run the game
     ai = AlienInvasion() 
     ai.run_game()
 
-    
