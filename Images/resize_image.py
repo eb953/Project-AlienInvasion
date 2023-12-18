@@ -1,9 +1,9 @@
 from PIL import Image
 
-image = Image.open('/Users/ericbanavong/Project-AlienInvasion/Project-AlienInvasion/Images/Frida1.jpeg')
+image = Image.open('Images/Frida2.jpeg')
 
-image.thumbnail((50,50))
+image.thumbnail((100,100))
 
-image.save('Frida1_thumbnail.jpeg')
+image.save('Frida2_thumbnail.jpeg')
 
 print(image)
