@@ -27,6 +27,7 @@ class AlienInvasion:
         while True: 
             #Watch for keyboard and mouse events
             self._check_events()
+            self.ship.update()
             self._update_screen()
 
     def _check_events(self): #A helper method does work insde a class but isn't meant to be called through an instance. A single leading underscore indicates a helper method 
@@ -39,12 +40,19 @@ class AlienInvasion:
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RIGHT:
                         self.ship.moving_right = True 
-                    if event.key == pygame.K_LEFT:
-                        self.ship.moving_left = True
-                    if event.key == pygame.K_UP:
-                        self.ship.moving_up = True 
-                    if  event.key == pygame.K_DOWN:
-                        self.ship.moving_down = True 
+                    elif event.type == pygame.K_LEFT:
+                        self.ship.moving_left = True 
+                
+                elif event.type == pygame.KEYUP:
+                    if event.key == pygame.K_RIGHT:
+                        self.ship.moving_right = False 
+                    elif event.key == pygame.K_LEFT:
+                        self.ship.moving_left = False   
+
+
+
+
+            
                         
 
 
