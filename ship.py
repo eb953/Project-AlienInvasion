@@ -13,8 +13,8 @@ class Ship:
         self.image = pygame.image.load('images/Frida1_thumbnail.jpeg')
         self.rect = self.image.get_rect() 
 
-        #Start each new ship at the bottom center of the screen.
-        self.rect.midbottom = self.screen_rect.midbottom
+        #Start each new ship at the center of the screen.
+        self.rect.center = self.screen_rect.center
     
     def blitme(self): #blitme() method draws the image to the screen at the position specified by self.rect
         """Draw the ship at its current location """
