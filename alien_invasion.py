@@ -13,12 +13,19 @@ class AlienInvasion:
         """Initialize the game, and create game resources"""
         pygame.init() 
         self.settings = Settings()
+        
+        #FullScreen mode 
 
-        self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
+        self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+        self.settings.screen_width = self.screen.get_rect().width
+        self.settings.screen_height = self.screen.get_rect().height
+
+        #comment the above out and uncomment below to have game in pop out mode 
+        #self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Alien Invasion")
 
         self.ship = Ship(self)
-
+    
         #set the background color -> this has been moved to setting file 
         ##self.bg_color = (0, 0, 255)
 
@@ -54,11 +61,13 @@ class AlienInvasion:
             self.ship.moving_up = True
         elif event.key == pygame.K_DOWN:
             self.ship.moving_down = True
+        elif event.key == pygame.K_q:
+             sys.exit() 
 
     def _check_keyup_events(self, event):
         """respond to key releases"""
         if event.key == pygame.K_RIGHT:
-                        self.ship.moving_right = False 
+            self.ship.moving_right = False 
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False   
         elif event.key == pygame.K_UP:
