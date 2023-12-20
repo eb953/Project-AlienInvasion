@@ -43,7 +43,7 @@ class AlienInvasion:
             for bullet in self.bullets.copy():
                 if bullet.rect.bottom <= 0:
                     self.bullets.remove(bullet)
-            print(len(self.bullets))
+            #print(len(self.bullets)) -> show case  that bullets are deleting in the terminal 
             self._update_screen()
 
     def _check_events(self): #A helper method does work insde a class but isn't meant to be called through an instance. A single leading underscore indicates a helper method 
@@ -88,8 +88,9 @@ class AlienInvasion:
     
     def _fire_bullet(self):
         """create a new bullet and add it to the bullets group"""
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)
+        if len(self.bullets) < self.settings.bullets_allowed:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
 
     def _update_screen(self):
          """update images on the screen , and flip to the new screen"""
