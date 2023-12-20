@@ -6,6 +6,8 @@ from settings import Settings
 
 from ship import Ship
 
+from bullet import Bullet
+
 class AlienInvasion:
     """Overall class to manage game assets and behaviors"""
 
@@ -25,6 +27,7 @@ class AlienInvasion:
         pygame.display.set_caption("Alien Invasion")
 
         self.ship = Ship(self)
+        self.bullets = pygame.sprite.Group()    
     
         #set the background color -> this has been moved to setting file 
         ##self.bg_color = (0, 0, 255)
@@ -35,6 +38,7 @@ class AlienInvasion:
             #Watch for keyboard and mouse events
             self._check_events()
             self.ship.update()
+            self.bullets.update()
             self._update_screen()
 
     def _check_events(self): #A helper method does work insde a class but isn't meant to be called through an instance. A single leading underscore indicates a helper method 
@@ -63,6 +67,8 @@ class AlienInvasion:
             self.ship.moving_down = True
         elif event.key == pygame.K_q:
              sys.exit() 
+        elif event.key == pygame.K_SPACE:
+            self._fire_bullet() 
 
     def _check_keyup_events(self, event):
         """respond to key releases"""
@@ -74,14 +80,21 @@ class AlienInvasion:
             self.ship.moving_up = False
         elif event.key == pygame.K_DOWN:
             self.ship.moving_down = False  
-
+    
+    def _fire_bullet(self):
+        """create a new bullet and add it to the bullets group"""
+        new_bullet = Bullet(self)
+        self.bullets.add(new_bullet)
 
     def _update_screen(self):
          """update images on the screen , and flip to the new screen"""
         #Redraw the screen during each pass through the loop 
          self.screen.fill(self.settings.bg_color)
          self.ship.blitme()
+         for bullet in self.bullets.sprites():
+                bullet.draw_bullet() 
          pygame.display.flip()
+    
 
 if __name__ == '__main__':
     # Make a game instance, and run the game
