@@ -38,11 +38,7 @@ class AlienInvasion:
             #Watch for keyboard and mouse events
             self._check_events()
             self.ship.update()
-            self.bullets.update()
-            #Get Rid of bullets that have disappeared
-            for bullet in self.bullets.copy():
-                if bullet.rect.bottom <= 0:
-                    self.bullets.remove(bullet)
+            self._update_bullets()
             #print(len(self.bullets)) -> show case  that bullets are deleting in the terminal 
             self._update_screen()
 
@@ -91,6 +87,15 @@ class AlienInvasion:
         if len(self.bullets) < self.settings.bullets_allowed:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
+
+    def _update_bullets(self):
+        """Update position of bullets and get rid of old bullets"""
+        #Update bullet positions 
+        #Get Rid of bullets that have disappeared
+        self.bullets.update()
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet) 
 
     def _update_screen(self):
          """update images on the screen , and flip to the new screen"""
