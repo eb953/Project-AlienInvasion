@@ -39,6 +39,11 @@ class AlienInvasion:
             self._check_events()
             self.ship.update()
             self.bullets.update()
+            #Get Rid of bullets that have disappeared
+            for bullet in self.bullets.copy():
+                if bullet.rect.bottom <= 0:
+                    self.bullets.remove(bullet)
+            print(len(self.bullets))
             self._update_screen()
 
     def _check_events(self): #A helper method does work insde a class but isn't meant to be called through an instance. A single leading underscore indicates a helper method 
