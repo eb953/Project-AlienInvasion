@@ -44,7 +44,9 @@ class AlienInvasion:
             self.ship.update()
             self._update_bullets()
             #print(len(self.bullets)) -> show case  that bullets are deleting in the terminal 
+            self._update_aliens()
             self._update_screen()
+            
 
     def _check_events(self): #A helper method does work insde a class but isn't meant to be called through an instance. A single leading underscore indicates a helper method 
             
@@ -139,6 +141,10 @@ class AlienInvasion:
         alien.rect.x = alien.x
         alien.rect.y = alien.rect.height +2*alien.rect.height*row_number
         self.aliens.add(alien)
+
+    def _update_aliens(self):
+        """update the positions of all aliens in the fleet"""
+        self.aliens.update() 
     
 
 if __name__ == '__main__':
