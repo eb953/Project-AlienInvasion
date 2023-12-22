@@ -156,7 +156,8 @@ class AlienInvasion:
         self.settings.fleet_direction *= -1 
 
     def _update_aliens(self):
-        """update the positions of all aliens in the fleet"""
+        """update the positions of all aliens in the fleet, check if the fleet is at an edge, then update the positions of all aliens in the fleet """
+        self._check_fleet_edges()
         self.aliens.update() 
     
 
